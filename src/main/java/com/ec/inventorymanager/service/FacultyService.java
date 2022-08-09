@@ -1,43 +1,18 @@
 package com.ec.inventorymanager.service;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.ec.inventorymanager.exception.UserNotFoundException;
 import com.ec.inventorymanager.model.Faculty;
-import com.ec.inventorymanager.repository.FacultyRepository;
 
-public class FacultyService {
+public interface FacultyService {
 	
-	private final FacultyRepository facultyRepository;
+	Faculty addStaff(Faculty faculty);
 	
-	@Autowired
-	public FacultyService(FacultyRepository facultyRepository) {
-		this.facultyRepository = facultyRepository;
-	}
+	List<Faculty> getAllStaff();
 	
-	public Faculty addFaculty(Faculty faculty) {
-		return facultyRepository.save(faculty);
-	}
+	Faculty getStaffById(Long id);
 	
-	public List<Faculty> findAllStaff(){
-		return facultyRepository.findAll();
-	}
+	Faculty updateStaff(Faculty faculty, Long id);
 	
-	public Faculty updateFaculty(Faculty faculty) {
-		return facultyRepository.save(faculty);
-	
-	}
-	
-	public Faculty findStaffById(Long id) {
-		return facultyRepository.findFacultyById(id)
-				.orElseThrow(() -> new UserNotFoundException ("User by id "+id+" was not found"));
-	}
-	
-	public void deleteStudent(Long id) {
-		facultyRepository.deleteFacultyById(id);
-		
-	}
+	void deleteStaff(Long id);
 
 }

@@ -19,22 +19,23 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ec.inventorymanager.exception.UserNotFoundException;
 import com.ec.inventorymanager.model.Student;
 import com.ec.inventorymanager.repository.StudentRepository;
+import com.ec.inventorymanager.service.StudentService;
 
 
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/app/v1")
+@RequestMapping("/studentapp/v1")
 public class StudentController {
 	
 	@Autowired
-	StudentRepository studentRepository;
+	StudentService studentService;
 	
 	
 	@GetMapping("/students")
 	public ResponseEntity<List<Student>> getAllStudents(){
 		 
-		List<Student> students = studentRepository.findAll();
+		List<Student> students = studentService.getAllStudents();
 		return new ResponseEntity<>(students, HttpStatus.OK);
 		
 	}
@@ -47,13 +48,13 @@ public class StudentController {
 	
 	@PostMapping("/addastudent")
 	public Student createStudent(@RequestBody Student student) {
-		return studentRepository.save(student);
+		return studentService.addStudent(student);
 	}
 //	
 	@PostMapping("/addstudent")
 	public ResponseEntity<Student> addStudent(@RequestBody Student student){
 		try {
-		    Student newStudent = studentRepository.save(new Student(student.getId(), student.getName(), student.getEmail(), student.getStatus()));
+		    Student newStudent = studentService.addStudent(student);
 		    return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
 		  } catch (Exception e) {
 		    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -62,14 +63,13 @@ public class StudentController {
 //	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Student> updateStudent(@RequestBody Student studentDetail, Long id){
-		Student student = studentRepository.findById(id)
-				.orElseThrow(() -> new UserNotFoundException("Student not exist with id: "+id));
+		Student student = studentService.getStudentById(id);
 		student.setName(studentDetail.getName());
 		student.setId(studentDetail.getId());
 		student.setEmail(studentDetail.getEmail());
 		student.setStatus(studentDetail.getStatus());
 		
-		Student updatedStudent = studentRepository.save(student);
+		Student updatedStudent = studentService.updateStudent(student, id);
 		
 		//return ResponseEntity.ok(updatedStudent);
 		return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
@@ -78,7 +78,7 @@ public class StudentController {
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Student> deleteStudent(@PathVariable("id") Long id){
-		studentRepository.deleteById(id);
+		studentService.deleteStudent(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}

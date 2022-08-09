@@ -23,7 +23,7 @@ import com.ec.inventorymanager.repository.FacultyRepository;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/app/v1")
+@RequestMapping("/facultyapp/v1")
 public class FacultyController {
 	
 	@Autowired
