@@ -9,6 +9,7 @@ import com.ec.inventorymanager.model.InventoryItem;
 import com.ec.inventorymanager.repository.InventoryRepository;
 
 @Service
+
 public class InventoryServiceImpl implements InventoryService {
 	
 	private InventoryRepository inventoryRepository;
@@ -39,13 +40,14 @@ public class InventoryServiceImpl implements InventoryService {
 				()-> new InventoryNotFoundException("Item with "+id+" not found"));
 		
 		existingItem.setId(item.getId());
-		existingItem.setAssignedDate(item.getAssignedDate());
-		existingItem.setAssignedTo(item.getAssignedTo());
 		existingItem.setItemName(item.getItemName());
+		existingItem.setSerialNumber(item.getSerialNumber());
+		existingItem.setKind(item.getKind());
 		existingItem.setKind(item.getKind());
 		existingItem.setPurchaseDate(item.getPurchaseDate());
+		existingItem.setAssignedDate(item.getAssignedDate());
 		existingItem.setStatus(item.getStatus());
-		
+		existingItem.setAssignedTo(item.getAssignedTo());
 		//save existing emp to DB
 		
 		inventoryRepository.save(existingItem);
@@ -59,5 +61,6 @@ public class InventoryServiceImpl implements InventoryService {
 		inventoryRepository.deleteById(id);
 		
 	}
+
 
 }

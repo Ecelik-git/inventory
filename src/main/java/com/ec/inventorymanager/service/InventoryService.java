@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ec.inventorymanager.model.InventoryItem;
 
+
 public interface InventoryService {
 	
 	

@@ -24,7 +24,7 @@ import com.ec.inventorymanager.service.StudentService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 @RequestMapping("/studentapp/v1")
 public class StudentController {
 	
@@ -82,13 +82,6 @@ public class StudentController {
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

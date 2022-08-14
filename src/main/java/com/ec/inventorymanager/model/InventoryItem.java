@@ -9,6 +9,7 @@ public class InventoryItem {
 	@Id
 	private Long id;
 	private String itemName;
+	private String serialNumber;
 	private String kind;
 	private String purchaseDate;
 	private String assignedDate;
@@ -17,17 +18,18 @@ public class InventoryItem {
 	
 	public InventoryItem() {}
 	
-	public InventoryItem(Long id, String itemName, String kind, String purchaseDate, String assignedDate, String status,
-			String assignedTo) {
-		super();
+	public InventoryItem(Long id, String itemName, String serialNumber, String kind, String purchaseDate,
+			String assignedDate, String status, String assignedTo) {
 		this.id = id;
 		this.itemName = itemName;
+		this.serialNumber = serialNumber;
 		this.kind = kind;
 		this.purchaseDate = purchaseDate;
 		this.assignedDate = assignedDate;
 		this.status = status;
 		this.assignedTo = assignedTo;
 	}
+	
 
 	public Long getId() {
 		return id;
@@ -85,12 +87,25 @@ public class InventoryItem {
 		this.assignedTo = assignedTo;
 	}
 
+
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+
+
 	@Override
 	public String toString() {
-		return "InventoryItem [id=" + id + ", itemName=" + itemName + ", kind=" + kind + ", purchaseDate="
-				+ purchaseDate + ", assignedDate=" + assignedDate + ", status=" + status + ", assignedTo=" + assignedTo
-				+ "]";
+		return "InventoryItem [id=" + id + ", itemName=" + itemName + ", serialNumber=" + serialNumber + ", kind="
+				+ kind + ", purchaseDate=" + purchaseDate + ", assignedDate=" + assignedDate + ", status=" + status
+				+ ", assignedTo=" + assignedTo + "]";
 	}
+
+	
+	
 	
 	
 	
