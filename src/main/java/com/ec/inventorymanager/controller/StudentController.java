@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ec.inventorymanager.exception.UserNotFoundException;
 import com.ec.inventorymanager.model.Student;
-import com.ec.inventorymanager.repository.StudentRepository;
 import com.ec.inventorymanager.service.StudentService;
 
 
@@ -40,11 +38,11 @@ public class StudentController {
 		
 	}
 	
-//	@GetMapping("/students/{id}")
-//	public ResponseEntity<Student> getStudentById(@PathVariable("id") Long id){
-//		Student student = studentService.findStudentById(id);
-//		return new ResponseEntity<>(student, HttpStatus.OK);
-//	}
+	@GetMapping("/students/{id}")
+	public ResponseEntity<Student> getStudentById(@PathVariable("id") Long id){
+		Student student = studentService.getStudentById(id);
+		return new ResponseEntity<>(student, HttpStatus.OK);
+	}
 	
 	@PostMapping("/addastudent")
 	public Student createStudent(@RequestBody Student student) {
